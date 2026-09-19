@@ -4,7 +4,7 @@ import { Pinecone } from '@pinecone-database/pinecone';
 
 const hfToken = process.env.HF_TOKEN;
 const pineconeApiKey = process.env.PINECONE_API_KEY;
-const indexName = 'kamo-portfolio';
+const indexName = 'kamogelosportfolio';
 
 if (!hfToken) throw new Error('Missing HF_TOKEN in environment variables.');
 if (!pineconeApiKey) throw new Error('Missing PINECONE_API_KEY in environment variables.');
