@@ -1,0 +1,21 @@
+{
+  "name": "kamo-portfolio-ai",
+  "version": "1.0.0",
+  "description": "AI Portfolio Assistant backend with RAG using Hugging Face and Pinecone",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "ingest": "node ingest.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@huggingface/inference": "^3.2.1",
+    "@pinecone-database/pinecone": "^3.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2"
+  }
+}
