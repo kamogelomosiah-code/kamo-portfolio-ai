@@ -11,7 +11,7 @@ This repo holds two separate things. Suggested name for the repo: `portfolio-ai-
 | **AI backend** (`server.js`, `ingest.js`) | A RAG chat API for the portfolio, using Hugging Face and Pinecone. It is the portfolio's optional fallback (`RENDER_BACKEND_URL`). Its knowledge base is still placeholder text and needs your real CV before it is useful. Not run or tested in this clean-up |
 | **Household budget app** (`budget/`) | A single-page, phone-first budget app. Works offline in the browser and syncs between phones through MasterAPI. Tested with two simulated phones, a wrong key and a wrong address against a local MasterAPI |
 
-**Budget app:** a new phone no longer overwrites a saved budget (fixed and tested). To publish it with GitHub Pages, set Settings → Pages → Source to "GitHub Actions". The workflow `.github/workflows/budget-pages.yml` deploys `budget/`. It currently runs only for pushes to the development branch, so GitHub may block it until `main` is allowed in the `github-pages` environment.
+**Budget app:** a new phone no longer overwrites a saved budget (fixed and tested). To publish it with GitHub Pages, set Settings → Pages → Source to "GitHub Actions". The workflow `.github/workflows/budget-pages.yml` deploys `budget/`. It runs for pushes to `main` (and the development branch).
 
 **Recommended:** move `budget/` into its own repo (`household-budget`) so each project has one home.
 

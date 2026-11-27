@@ -4,7 +4,7 @@ name: Deploy budget to Pages
 
 on:
   push:
-    branches: [claude/video-site-admin-login-dosntv]
+    branches: [main, claude/video-site-admin-login-dosntv]
     paths: [budget/**, .github/workflows/budget-pages.yml]
   workflow_dispatch:
 
