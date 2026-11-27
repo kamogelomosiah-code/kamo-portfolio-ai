@@ -2,6 +2,19 @@
 
 A Node.js and Express backend for an AI portfolio assistant using Hugging Face Inference Providers, Pinecone, and Retrieval-Augmented Generation (RAG).
 
+## Where this project is now (27 Nov 2026)
+
+This repo holds two separate things. Suggested name for the repo: `portfolio-ai-backend`.
+
+| | |
+|---|---|
+| **AI backend** (`server.js`, `ingest.js`) | A RAG chat API for the portfolio, using Hugging Face and Pinecone. It is the portfolio's optional fallback (`RENDER_BACKEND_URL`). Its knowledge base is still placeholder text and needs your real CV before it is useful. Not run or tested in this clean-up |
+| **Household budget app** (`budget/`) | A single-page, phone-first budget app. Works offline in the browser and syncs between phones through MasterAPI. Tested with two simulated phones, a wrong key and a wrong address against a local MasterAPI |
+
+**Budget app:** a new phone no longer overwrites a saved budget (fixed and tested). To publish it with GitHub Pages, set Settings → Pages → Source to "GitHub Actions". The workflow `.github/workflows/budget-pages.yml` deploys `budget/`. It runs for pushes to `main` (and the development branch).
+
+**Recommended:** move `budget/` into its own repo (`household-budget`) so each project has one home.
+
 ## Prerequisites
 
 - Node.js 18 or newer

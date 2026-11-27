@@ -1,5 +1,5 @@
 {
-  "name": "kamo-portfolio-ai",
+  "name": "portfolio-ai-backend",
   "version": "1.0.0",
   "description": "AI Portfolio Assistant backend with RAG using Hugging Face and Pinecone",
   "main": "server.js",
