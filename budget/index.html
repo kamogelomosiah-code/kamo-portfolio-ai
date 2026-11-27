@@ -690,7 +690,7 @@ const sample=()=>{
 };
 let state;
 try{state=JSON.parse(localStorage.getItem(KEY))}catch(e){}
-if(!state||!Array.isArray(state.items))state=sample();
+if(!state||!Array.isArray(state.items)){state=sample();state._sample=true}/* never edited by a person yet */
 /* upgrade older saves */
 function migrate(){
 if(state.start==null){state.start=state.income||0;delete state.income}
@@ -712,7 +712,9 @@ let cfg={url:'',key:''};try{cfg=Object.assign(cfg,JSON.parse(localStorage.getIte
 const cfgOn=()=>!!(cfg.url&&cfg.key);
 let cloudReady=false,writing=false,again=false,pushT=null,lastPush=0,pendingCloud=null,syncState='local',firstApply=true,pollT=null;
 const saveLocal=()=>{try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}};
-const save=()=>{state._at=Date.now();saveLocal();queueCloud()};
+/* A person editing clears the 'sample' mark. Automatic saves at start-up don't, so a brand-new phone never overwrites a saved budget. */
+let userUntil=0;['pointerdown','click','keydown','input','change'].forEach(ev=>document.addEventListener(ev,()=>{userUntil=Date.now()+2000},true));
+const save=()=>{if(Date.now()<userUntil)delete state._sample;state._at=Date.now();saveLocal();queueCloud()};
 const apiBase=()=>cfg.url.replace(/\/+$/,'').replace(/\/api(\/v1)?$/,'')+'/api/v1';
 async function api(method,path,body){const r=await fetch(apiBase()+path,{method,headers:{'X-API-Key':cfg.key,'Content-Type':'application/json'},body:body===undefined?undefined:JSON.stringify(body)});
  let j=null;try{j=await r.json()}catch(e){}
@@ -737,6 +739,7 @@ async function pullCloud(first){if(!cfgOn())return;
   try{const r=await api('GET','/kv/'+API_KEY_NAME);d=r&&r.value}catch(e){if(e.status!==404)throw e}
   cloudReady=true;
   if(!d||!d.json){firstApply=false;settleSetup();pushCloud();return}
+  if(state._sample&&d.by!==DEV){applyCloud(d);setSync('synced');settleSetup();return}/* new phone: take the saved budget, don't replace it */
   if(d.by===DEV&&d.at===lastPush){if(!writing)setSync('synced');settleSetup();return}
   const mine=state._at||0,theirs=d.at||0;
   if(theirs>mine){if(open&&!firstApply){pendingCloud=d;setSync('synced')}else{applyCloud(d);setSync('synced')}}
